@@ -1,0 +1,105 @@
+/* 1) Importar la fuente Open Sans desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+/* 2) Definir variables para la paleta de colores Admira */
+:root {
+  --admira-olive: #689840;  /* Principal */
+  --admira-denim: #3f5c54;
+  --admira-cream: #F0EFD9;
+  --admira-beach: #FBB04A;
+  --admira-sky:   #3686C9;
+  --admira-rose:  #F66F8D;
+}
+
+/* 3) Estilos generales */
+body {
+  font-family: 'Open Sans', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  /* Usamos Admira Cream como color de fondo principal */
+  background-color: var(--admira-cream);
+  color: #333;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  /* Ejemplo: usar el tono “Denim” para los títulos */
+  color: var(--admira-denim);
+}
+
+/* 4) Estilos del formulario */
+form {
+  background-color: #fff;         /* Blanco para resaltar sobre el fondo cream */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;  /* Semi-bold para destacar */
+}
+
+#staticTime {
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 5px;
+  margin-right: 5px;
+}
+
+#salaChecklist label {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+#horasTableContainer {
+  margin-top: 20px;
+  display: none;  /* Muestra u oculta según la lógica de tu JavaScript */
+}
+
+/* 5) Tablas */
+#horasTable, 
+#tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#horasTable th, #horasTable td,
+#tabla th, #tabla td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+#horasTable th, #tabla th {
+  background-color: #f2f2f2;
+}
+
+/* 6) Botón principal */
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  /* Usamos Admira Olive como color principal de acción */
+  background-color: var(--admira-olive);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  /* Un tono más oscuro de “Admira Olive” para el hover */
+  background-color: #56793f;
+}
