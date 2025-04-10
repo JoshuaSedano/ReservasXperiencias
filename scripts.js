@@ -96,3 +96,46 @@
     horaFinHour.value = String(date.getHours()).padStart(2, '0');
     horaFinMinute.value = String(date.getMinutes()).padStart(2, '0');
   }
+
+
+  // Datos
+
+  document.getElementById("formulario").addEventListener("submit", function (e) {
+    e.preventDefault();
+  
+    const fecha = document.querySelector("input[name='fecha']").value;
+    const motivo = document.querySelector("input[name='motivo']").value;
+  
+    const salasSeleccionadas = Array.from(document.querySelectorAll('#salaChecklist input[type="checkbox"]:checked'))
+      .map(cb => cb.value);
+  
+    const horarios = [];
+    document.querySelectorAll('#horasTable tbody tr').forEach(row => {
+      const sala = row.cells[0].textContent;
+      const horaInicio = row.querySelector('.horaInicioHora').value + ':' + row.querySelector('.horaInicioMinuto').value;
+      const horaFin = row.querySelector('.horaFinHora').value + ':' + row.querySelector('.horaFinMinuto').value;
+      horarios.push({ sala, horaInicio, horaFin });
+    });
+  
+    const data = {
+      fecha,
+      motivo,
+      salas: salasSeleccionadas,
+      horarios
+    };
+  
+    fetch("http://localhost:5000/reservar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+      .then(data => {
+        alert(data.mensaje);
+      }).catch(err => {
+        alert("Error al enviar la reserva");
+        console.error(err);
+      });
+  });
+  
