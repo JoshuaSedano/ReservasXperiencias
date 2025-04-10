@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
 import datetime
+import os
 
 app = Flask(__name__)
 CORS(app)  # Permite llamadas desde el frontend
