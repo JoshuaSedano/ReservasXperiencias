@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fdfdfd;
+    color: #333;
+  }
+  h1, h2, h3 {
+    text-align: center;
+    color: #444;
+  }
+  form {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  /* Para los checkboxes de sala */
+  #salaChecklist label {
+    font-weight: normal;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  /* Selects */
+  select {
+    padding: 5px;
+    margin-right: 5px;
+  }
+  /* Botón de enviar */
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  /* Tabla para configurar horarios */
+  #horasTableContainer {
+    display: none;
+    margin-top: 20px;
+  }
+  #horasTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #horasTable th,
+  #horasTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  #horasTable th {
+    background-color: #f2f2f2;
+  }
+  /* Tabla de reservas existentes */
+  #tabla {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  #tabla th,
+  #tabla td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+  }
+  #tabla th {
+    background-color: #f2f2f2;
+  }
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+  }

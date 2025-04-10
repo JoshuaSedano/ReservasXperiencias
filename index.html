@@ -3,135 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>Reservas de Salas</title>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
-    label { display: block; margin-top: 10px; }
-    select { margin-right: 10px; }
-    table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-    th, td { border: 1px solid #ccc; padding: 6px; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Reservar una sala</h1>
   <form id="formulario">
-    <label>Sala:
-      <select name="sala">
-        <option>Oasis</option>
-        <option>Dark Store</option>
-        <option>Admira U</option>
-        <option>Planeta</option>
-      </select>
-    </label>
+    <!-- Otros campos del formulario -->
     <label>Fecha:
       <input type="date" name="fecha" required>
     </label>
-
-    <label>Hora inicio:
-      <select id="horaInicioHora" required></select>
-      <select id="horaInicioMinuto" required></select>
-    </label>
-    
-    <label>Hora fin:
-      <select id="horaFinHora" required></select>
-      <select id="horaFinMinuto" required></select>
-    </label>
-    <label>
-        <input type="checkbox" name="visitaSala" value="sí">
-        Visita + sala reunión
-      </label>
-      
     <label>Motivo:
       <input type="text" name="motivo" required>
     </label>
+
+    <!-- Campo de salas como checklist -->
+    <label>Xpriencia:</label>
+    <div id="salaChecklist">
+      <label><input type="checkbox" value="Oasis"> Oasis</label>
+      <label><input type="checkbox" value="Dark Store"> Dark Store</label>
+      <label><input type="checkbox" value="Admira U"> Admira U</label>
+      <label><input type="checkbox" value="Planeta"> Planeta</label>
+    </div>
+
+    <!-- Contenedor para la tabla dinámica de horas -->
+    <div id="horasTableContainer">
+      <h3>Configurar Horarios</h3>
+      <table id="horasTable">
+        <thead>
+          <tr>
+            <th>Sala</th>
+            <th>Hora inicio</th>
+            <th>Hora fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenarán dinámicamente las filas -->
+        </tbody>
+      </table>
+    </div>
     <button type="submit">Reservar</button>
   </form>
 
   <h2>Reservas existentes</h2>
   <table id="tabla">
     <thead>
-      <tr><th>Fecha</th><th>Sala</th><th>Inicio</th><th>Fin</th><th>Motivo</th></tr>
+      <tr>
+        <th>Fecha</th>
+        <th>Sala</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Motivo</th>
+      </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <!-- Aquí se cargarán las reservas existentes -->
+    </tbody>
   </table>
-
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzrdLDXWCZE5oE3HAkDSFr3Okk1ZGe9sJnHl90ZarMWPsWIHwTZaQu8crhH0j--1NwB/exec";
-
-    const horaInicioHora = document.getElementById('horaInicioHora');
-    const horaInicioMinuto = document.getElementById('horaInicioMinuto');
-    const horaFinHora = document.getElementById('horaFinHora');
-    const horaFinMinuto = document.getElementById('horaFinMinuto');
-
-    function rellenarHoras(select) {
-      for (let i = 0; i < 24; i++) {
-        const opt = document.createElement('option');
-        opt.value = String(i).padStart(2, '0');
-        opt.text = String(i).padStart(2, '0');
-        select.appendChild(opt);
-      }
-    }
-
-    function rellenarMinutos(select) {
-      ['00', '15', '30', '45'].forEach(min => {
-        const opt = document.createElement('option');
-        opt.value = min;
-        opt.text = min;
-        select.appendChild(opt);
-      });
-    }
-
-    rellenarHoras(horaInicioHora);
-    rellenarHoras(horaFinHora);
-    rellenarMinutos(horaInicioMinuto);
-    rellenarMinutos(horaFinMinuto);
-
-    // Autoajustar fin +30 min
-    horaInicioHora.addEventListener('change', ajustarFin);
-    horaInicioMinuto.addEventListener('change', ajustarFin);
-
-    function ajustarFin() {
-      const h = parseInt(horaInicioHora.value, 10);
-      const m = parseInt(horaInicioMinuto.value, 10);
-      const fecha = new Date();
-      fecha.setHours(h);
-      fecha.setMinutes(m + 30);
-
-      horaFinHora.value = String(fecha.getHours()).padStart(2, '0');
-      horaFinMinuto.value = String(fecha.getMinutes()).padStart(2, '0');
-    }
-
-    document.getElementById('formulario').addEventListener('submit', async e => {
-  e.preventDefault();
-
-  const form = new FormData(e.target);
-  const horaInicio = `${horaInicioHora.value}:${horaInicioMinuto.value}`;
-  const horaFin = `${horaFinHora.value}:${horaFinMinuto.value}`;
-  form.append('horaInicio', horaInicio);
-  form.append('horaFin', horaFin);
-
-  await fetch(scriptURL, {
-    method: 'POST',
-    body: form
-    // NO pongas headers: el navegador lo maneja solo para FormData
-  });
-
-  e.target.reset();
-  cargarReservas();
-});
-
-
-    async function cargarReservas() {
-      const res = await fetch(scriptURL);
-      const reservas = await res.json();
-      const tbody = document.querySelector('#tabla tbody');
-      tbody.innerHTML = '';
-      reservas.forEach(r => {
-        const fila = `<tr><td>${r.fecha}</td><td>${r.sala}</td><td>${r.horaInicio}</td><td>${r.horaFin}</td><td>${r.motivo}</td></tr>`;
-        tbody.innerHTML += fila;
-      });
-    }
-
-    cargarReservas();
-  </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
