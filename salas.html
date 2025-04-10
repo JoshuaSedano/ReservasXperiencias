@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reservar una Sala</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Fuente Open Sans desde Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <h1>Reservar una Sala</h1>
+
+  <form id="reservaForm" action="#" method="POST">
+    <!-- Fecha -->
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required />
+
+    <!-- Motivo -->
+    <label for="motivo">Motivo:</label>
+    <input type="text" id="motivo" name="motivo" placeholder="Describa brevemente el motivo" />
+
+    <!-- N° Personas -->
+    <label for="nPersonas">N° Personas:</label>
+    <input type="number" id="nPersonas" name="nPersonas" min="1" placeholder="Ej: 10" />
+
+    <!-- Seleccionar una Sala -->
+    <label for="sala">Seleccione una Sala:</label>
+    <select id="sala" name="sala" required>
+      <option value="" disabled selected>-- Elija una sala --</option>
+      <optgroup label="Admira U">
+        <option value="Sala Dr Rius">Sala Dr Rius (8 personas + videollamada)</option>
+        <option value="Sala Estudio">Sala Estudio (8 personas + videollamada)</option>
+        <option value="Biblioteca">Biblioteca (4 personas, sin videollamada)</option>
+        <option value="Sala Reuniones Sótano">Sala Reuniones Sótano (16 personas, sin videollamada)</option>
+      </optgroup>
+      <optgroup label="Santa Rosa">
+        <option value="Sala 360">Sala 360 (10 personas, sin videollamada)</option>
+        <option value="Garaje">Garaje (30 personas, sin videollamada)</option>
+        <option value="Barmira">Barmira (16 personas, sin videollamada)</option>
+      </optgroup>
+      <optgroup label="Planeta">
+        <option value="Mesa nave">Mesa nave (6 personas, videollamada)</option>
+        <option value="Sala Reuniones Terminator">Sala Reuniones Terminator (12 personas, videollamada)</option>
+      </optgroup>
+    </select>
+
+    <!-- Configurar Horarios (inicialmente oculto) -->
+    <div id="horasTableContainer" style="display: none;">
+      <h2>Configurar Horarios</h2>
+      <table id="horasTable">
+        <thead>
+          <tr>
+            <th>Sala</th>
+            <th>Hora inicio</th>
+            <th>Hora fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenará dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Botón para reservar -->
+    <button type="submit">Reservar</button>
+  </form>
+
+  <!-- Reservas existentes -->
+  <h2>Reservas existentes</h2>
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Sala</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Motivo</th>
+      </tr>
+    </thead>
+    <!-- Aquí se agregarían dinámicamente las reservas -->
+  </table>
+
+  <script src="SalasScripts.js"></script>
+</body>
+</html>

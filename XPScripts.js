@@ -1,5 +1,5 @@
    // Agregar evento a cada checkbox para actualizar la tabla de horarios
-   document.querySelectorAll('#salaChecklist input[type="checkbox"]').forEach(checkbox => {
+   document.querySelectorAll('#XPChecklist input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', updateHorasTable);
   });
 
@@ -9,7 +9,7 @@
     tbody.innerHTML = ''; // Se elimina el contenido previo
 
     // Se obtienen los checkboxes seleccionados
-    const checkboxes = document.querySelectorAll('#salaChecklist input[type="checkbox"]:checked');
+    const checkboxes = document.querySelectorAll('#XPChecklist input[type="checkbox"]:checked');
     if (checkboxes.length > 0) {
       tableContainer.style.display = 'block';
     } else {
