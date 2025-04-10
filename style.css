@@ -4,9 +4,9 @@
 /* 2) Definir variables para la paleta de colores Admira */
 :root {
   --admira-olive: #689840;  /* Principal */
-  --admira-denim: #3f5c54;
-  --admira-cream: #F0EFD9;
-  --admira-beach: #FBB04A;
+  --admira-denim: #343E44;
+  --admira-cream: #F0EFE9;
+  --admira-beach: #FBB040;
   --admira-sky:   #3686C9;
   --admira-rose:  #F66F8D;
 }
@@ -18,7 +18,7 @@ body {
   margin: 0 auto;
   padding: 20px;
   /* Usamos Admira Cream como color de fondo principal */
-  background-color: var(--admira-cream);
+  background-color: #fff2f2;
   color: #333;
 }
 
@@ -30,7 +30,7 @@ h1, h2, h3 {
 
 /* 4) Estilos del formulario */
 form {
-  background-color: #fff;         /* Blanco para resaltar sobre el fondo cream */
+  background-color: var(--admira-cream);         /* Blanco para resaltar sobre el fondo cream */
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -48,12 +48,25 @@ label {
   margin-bottom: 20px;
 }
 
-select {
-  padding: 5px;
-  margin-right: 5px;
-}
+  input[type="date"],
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-#salaChecklist label {
+#XPChecklist label {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: normal;
+}
+#salasChecklist label {
   display: inline-block;
   margin-right: 10px;
   font-weight: normal;
@@ -87,7 +100,7 @@ select {
 button[type="submit"] {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   margin-top: 20px;
   /* Usamos Admira Olive como color principal de acción */
   background-color: var(--admira-olive);
@@ -101,5 +114,13 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   /* Un tono más oscuro de “Admira Olive” para el hover */
-  background-color: #56793f;
+  background-color: #5a8837;
 }
+  #horariosContainer {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9f5e9; /* Fondo suave */
+    border: 1px solid #c8e0c8;
+    border-radius: 4px;
+  }
+  

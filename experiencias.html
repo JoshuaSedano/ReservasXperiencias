@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservas de Experiencias</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Reservar una Experiencia</h1>
+  <form id="formulario">
+    <!-- Otros campos del formulario -->
+    <label>Fecha:
+      <input type="date" name="fecha" required>
+    </label>
+    <label>Motivo:
+      <input type="text" name="motivo" required>
+    </label>
+    <label>NºPersonas:
+        <input type="number" name="nPersonas" required>
+    </label>
+
+    <!-- Campo de salas como checklist -->
+    <label>Xpriencia:</label>
+    <div id="XPChecklist">
+      <label><input type="checkbox" value="Oasis"> Oasis️</label>
+      <label><input type="checkbox" value="Dark Store"> Dark Store</label>
+      <label><input type="checkbox" value="Admira U"> Admira U</label>
+      <label><input type="checkbox" value="Planeta"> Planeta</label>
+    </div>
+
+    <!-- Contenedor para la tabla dinámica de horas -->
+    <div id="horasTableContainer">
+      <h3>Configurar Horarios</h3>
+      <table id="horasTable">
+        <thead>
+          <tr>
+            <th>Sala</th>
+            <th>Hora inicio</th>
+            <th>Hora fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenarán dinámicamente las filas -->
+        </tbody>
+      </table>
+    </div>
+    <button type="submit">Reservar</button>
+  </form>
+
+  <h2>Reservas existentes</h2>
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Sala</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Motivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aquí se cargarán las reservas existentes -->
+    </tbody>
+  </table>
+<script src="XPScripts.js"></script>
+</body>
+</html>

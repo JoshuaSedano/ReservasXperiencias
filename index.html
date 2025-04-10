@@ -2,63 +2,51 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Reservas de Salas</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seleccione una opción</title>
+  <!-- Importamos la fuente Open Sans desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background-color: #F0EFD9; /* Admira Cream */
+      color: #333;
+    }
+    
+    h1 {
+      color: #3f5c54; /* Admira Denim */
+      margin-bottom: 40px;
+    }
+    
+    .option-button {
+      display: inline-block;
+      width: 300px;
+      padding: 20px;
+      margin: 20px;
+      background-color: #65894c; /* Admira Olive */
+      color: #fff;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .option-button:hover {
+      background-color: #56793f;
+    }
+  </style>
 </head>
 <body>
-  <h1>Reservar una sala</h1>
-  <form id="formulario">
-    <!-- Otros campos del formulario -->
-    <label>Fecha:
-      <input type="date" name="fecha" required>
-    </label>
-    <label>Motivo:
-      <input type="text" name="motivo" required>
-    </label>
-
-    <!-- Campo de salas como checklist -->
-    <label>Xpriencia:</label>
-    <div id="salaChecklist">
-      <label><input type="checkbox" value="Oasis🎮"> Oasis️</label>
-      <label><input type="checkbox" value="Dark Store👞"> Dark Store</label>
-      <label><input type="checkbox" value="Admira U📖"> Admira U</label>
-      <label><input type="checkbox" value="Planeta🌍"> Planeta</label>
-    </div>
-
-    <!-- Contenedor para la tabla dinámica de horas -->
-    <div id="horasTableContainer">
-      <h3>Configurar Horarios</h3>
-      <table id="horasTable">
-        <thead>
-          <tr>
-            <th>Sala</th>
-            <th>Hora inicio</th>
-            <th>Hora fin</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Se llenarán dinámicamente las filas -->
-        </tbody>
-      </table>
-    </div>
-    <button type="submit">Reservar</button>
-  </form>
-
-  <h2>Reservas existentes</h2>
-  <table id="tabla">
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Sala</th>
-        <th>Inicio</th>
-        <th>Fin</th>
-        <th>Motivo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Aquí se cargarán las reservas existentes -->
-    </tbody>
-  </table>
-<script src="scripts.js"></script>
+  <h1>Seleccione una opción</h1>
+  <!-- Botón para Experiencias -->
+  <a href="experiencias.html" class="option-button">Experiencias</a>
+  <!-- Botón para Formaciones -->
+  <a href="salas.html" class="option-button">Salas</a>
 </body>
 </html>
