@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- CSS de Flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- El propio flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Localización en español -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reservar una Sala</title>
@@ -17,7 +25,8 @@
   <form id="reservaForm" action="#" method="POST">
     <!-- Fecha -->
     <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha" required />
+    <input type="text" id="fecha" placeholder="dd/mm/yyyy" name="fecha" required>
+    
 
     <!-- Motivo -->
     <label for="motivo">Motivo:</label>
@@ -27,26 +36,29 @@
     <label for="nPersonas">N° Personas:</label>
     <input type="number" id="nPersonas" name="nPersonas" min="1" placeholder="Ej: 10" />
 
+    <label for="videollamada">¿Necesita videollamada?</label>
+    <input type="checkbox" id="videollamada" name="videollamada">
     <!-- Seleccionar una Sala -->
-    <label for="sala">Seleccione una Sala:</label>
-    <select id="sala" name="sala" required>
-      <option value="" disabled selected>-- Elija una sala --</option>
-      <optgroup label="Admira U">
-        <option value="Sala Dr Rius">Sala Dr Rius (8 personas + videollamada)</option>
-        <option value="Sala Estudio">Sala Estudio (8 personas + videollamada)</option>
-        <option value="Biblioteca">Biblioteca (4 personas, sin videollamada)</option>
-        <option value="Sala Reuniones Sótano">Sala Reuniones Sótano (16 personas, sin videollamada)</option>
-      </optgroup>
-      <optgroup label="Santa Rosa">
-        <option value="Sala 360">Sala 360 (10 personas, sin videollamada)</option>
-        <option value="Garaje">Garaje (30 personas, sin videollamada)</option>
-        <option value="Barmira">Barmira (16 personas, sin videollamada)</option>
-      </optgroup>
-      <optgroup label="Planeta">
-        <option value="Mesa nave">Mesa nave (6 personas, videollamada)</option>
-        <option value="Sala Reuniones Terminator">Sala Reuniones Terminator (12 personas, videollamada)</option>
-      </optgroup>
-    </select>
+ <!-- Seleccionar una Sala (las opciones contienen datos en atributos, pero se muestra solo el nombre) -->
+ <label for="sala">Seleccione una Sala:</label>
+ <select id="sala" name="sala" required>
+   <option value="" disabled selected>-- Elija una sala --</option>
+   <optgroup label="Admira U">
+     <option value="Sala Dr Rius" data-capacity="8" data-videoconference="true">Sala Dr Rius</option>
+     <option value="Sala Estudio" data-capacity="8" data-videoconference="true">Sala Estudio</option>
+     <option value="Biblioteca" data-capacity="4" data-videoconference="false">Biblioteca</option>
+     <option value="Sala Reuniones Sótano" data-capacity="16" data-videoconference="false">Sala Reuniones Sótano</option>
+   </optgroup>
+   <optgroup label="Santa Rosa">
+     <option value="Sala 360" data-capacity="10" data-videoconference="false">Sala 360</option>
+     <option value="Garaje" data-capacity="30" data-videoconference="false">Garaje</option>
+     <option value="Barmira" data-capacity="16" data-videoconference="false">Barmira</option>
+   </optgroup>
+   <optgroup label="Planeta">
+     <option value="Mesa nave" data-capacity="6" data-videoconference="true">Mesa nave</option>
+     <option value="Sala Reuniones Terminator" data-capacity="12" data-videoconference="true">Sala Reuniones Terminator</option>
+   </optgroup>
+ </select>
 
     <!-- Configurar Horarios (inicialmente oculto) -->
     <div id="horasTableContainer" style="display: none;">
@@ -83,7 +95,23 @@
     </thead>
     <!-- Aquí se agregarían dinámicamente las reservas -->
   </table>
-
+<script>
+    // Inicializar flatpickr para el campo de fecha
+    flatpickr("#fecha", {
+      dateFormat: "d/m/Y",
+      locale: "es" // Localización en español
+    });
+  
+    // Manejar el evento submit del formulario
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar el envío normal del formulario
+  
+      // Aquí puedes recoger los datos y enviarlos a tu API o hacer lo que necesites
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      console.log(data); // Muestra los datos en la consola (puedes enviar a tu API aquí)
+    });
+</script>
   <script src="SalasScripts.js"></script>
 </body>
 </html>
