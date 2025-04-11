@@ -1,35 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Reservas de Experiencias</title>
+  <!-- Si tienes un style.css, puedes enlazarlo -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <h1>Reservar una Experiencia</h1>
+
+  <!-- Formulario sin action ni method, usaremos fetch en el submit -->
   <form id="formulario">
-    <!-- Otros campos del formulario -->
+    <!-- Fecha -->
     <label>Fecha:
       <input type="date" name="fecha" required>
     </label>
+    <!-- Motivo -->
     <label>Motivo:
       <input type="text" name="motivo" required>
     </label>
+    <!-- Nº de Personas -->
     <label>NºPersonas:
-        <input type="number" name="nPersonas" required>
+      <input type="number" name="nPersonas" required>
     </label>
 
-    <!-- Campo de salas como checklist -->
+    <!-- Checkboxes de Experiencias (usamos name="experiencia" para agruparlas) -->
     <label>Xpriencia:</label>
     <div id="XPChecklist">
-      <label><input type="checkbox" value="Oasis"> Oasis️</label>
-      <label><input type="checkbox" value="Dark Store"> Dark Store</label>
-      <label><input type="checkbox" value="Admira U"> Admira U</label>
-      <label><input type="checkbox" value="Planeta"> Planeta</label>
+      <label><input type="checkbox" name="experiencia" value="Oasis"> Oasis</label>
+      <label><input type="checkbox" name="experiencia" value="Dark Store"> Dark Store</label>
+      <label><input type="checkbox" name="experiencia" value="Admira U"> Admira U</label>
+      <label><input type="checkbox" name="experiencia" value="Planeta"> Planeta</label>
     </div>
 
-    <!-- Contenedor para la tabla dinámica de horas -->
+    <!-- Sección de horarios (puedes llenarla dinámicamente si quieres) -->
     <div id="horasTableContainer">
       <h3>Configurar Horarios</h3>
       <table id="horasTable">
@@ -41,13 +47,22 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Se llenarán dinámicamente las filas -->
+          <!-- Se llenan dinámicamente con JavaScript si lo deseas -->
+          <!-- Ejemplo de fila manual:
+          <tr>
+            <td>Admira U</td>
+            <td><input type="time" name="inicio" value="16:30"></td>
+            <td><input type="time" name="fin" value="17:00"></td>
+          </tr>
+          -->
         </tbody>
       </table>
     </div>
+
     <button type="submit">Reservar</button>
   </form>
 
+  <!-- Tabla para mostrar Reservas existentes (si luego quieres hacer un GET a SheetDB) -->
   <h2>Reservas existentes</h2>
   <table id="tabla">
     <thead>
@@ -60,9 +75,11 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Aquí se cargarán las reservas existentes -->
+      <!-- Aquí se agregarían filas con JS si luego quieres listar datos -->
     </tbody>
   </table>
-<script src="XPScripts.js"></script>
+  <script src="XPScripts.js"></script>
+
 </body>
+
 </html>
