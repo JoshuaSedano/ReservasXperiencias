@@ -2,6 +2,15 @@
 <html lang="es">
 
 <head>
+<!-- CSS de Flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- El propio flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Localización en español -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
   <meta charset="UTF-8">
   <title>Reservas de Experiencias</title>
   <!-- Si tienes un style.css, puedes enlazarlo -->
@@ -14,16 +23,17 @@
   <!-- Formulario sin action ni method, usaremos fetch en el submit -->
   <form id="formulario">
     <!-- Fecha -->
-    <label>Fecha:
-      <input type="date" name="fecha" required>
-    </label>
+
+    <label for="fecha">Fecha:</label>
+    <input type="text" id="fecha" placeholder="dd/mm/yyyy" name="fecha"required>
+    
     <!-- Motivo -->
     <label>Motivo:
-      <input type="text" name="motivo" required>
+      <input type="text" name="motivo" required placeholder="Describa brevemente el motivo">
     </label>
     <!-- Nº de Personas -->
     <label>NºPersonas:
-      <input type="number" name="nPersonas" required>
+      <input type="number" name="nPersonas" required min="1" placeholder="Ej: 10">
     </label>
 
     <!-- Checkboxes de Experiencias (usamos name="experiencia" para agruparlas) -->
@@ -68,7 +78,7 @@
     <thead>
       <tr>
         <th>Fecha</th>
-        <th>Sala</th>
+        <th>Experiencia</th>
         <th>Inicio</th>
         <th>Fin</th>
         <th>Motivo</th>
@@ -78,6 +88,23 @@
       <!-- Aquí se agregarían filas con JS si luego quieres listar datos -->
     </tbody>
   </table>
+<script>
+  // Inicializar flatpickr para el campo de fecha
+  flatpickr("#fecha", {
+    dateFormat: "d/m/Y",
+    locale: "es" // Localización en español
+  });
+
+  // Manejar el evento submit del formulario
+  document.getElementById('formulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar el envío normal del formulario
+
+    // Aquí puedes recoger los datos y enviarlos a tu API o hacer lo que necesites
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data); // Muestra los datos en la consola (puedes enviar a tu API aquí)
+  });
+</script>
   <script src="XPScripts.js"></script>
 
 </body>

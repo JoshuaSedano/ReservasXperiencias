@@ -103,7 +103,7 @@ function updateHorasTable() {
 
     // Celda para hora de inicio (con selects para hora y minuto)
     const cellInicio = document.createElement('td');
-    const selectHoraInicio = createSelect('horaInicioHora', 'horaInicioHora_' + index, 24);
+    const selectHoraInicio = createSelect('horaInicioHora', 'horaInicioHora_' + index, 19);
     selectHoraInicio.classList.add('horaInicioHora');
     // Al cambiar el select, se ajusta automáticamente la hora fin
     selectHoraInicio.addEventListener('change', () => adjustFinForRow(row));
@@ -116,7 +116,7 @@ function updateHorasTable() {
 
     // Celda para hora de fin (con selects para hora y minuto)
     const cellFin = document.createElement('td');
-    const selectHoraFin = createSelect('horaFinHora', 'horaFinHora_' + index, 24);
+    const selectHoraFin = createSelect('horaFinHora', 'horaFinHora_' + index, 19);
     selectHoraFin.classList.add('horaFinHora');
     const selectMinutoFin = createSelectMinutes('horaFinMinuto', 'horaFinMinuto_' + index);
     selectMinutoFin.classList.add('horaFinMinuto');
@@ -136,7 +136,7 @@ function createSelect(name, id, max) {
   const select = document.createElement('select');
   select.name = name;
   select.id = id;
-  for (let i = 0; i < max; i++) {
+  for (let i = 9; i < max; i++) {
     const option = document.createElement('option');
     option.value = String(i).padStart(2, '0');
     option.text = String(i).padStart(2, '0');
