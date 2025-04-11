@@ -10,7 +10,7 @@ function updateHorasTable() {
 
   const salaSelect = document.getElementById('sala');
   const selectedValue = salaSelect.value;
-  
+
   if (selectedValue && selectedValue !== "") {
     tableContainer.style.display = 'block';
 
@@ -107,7 +107,7 @@ document.getElementById('reservaForm').addEventListener('submit', e => {
   const fecha = formData.get('fecha');
   const motivo = formData.get('motivo');
   const nPersonas = formData.get('nPersonas');
-  
+
   // Obtener la sala seleccionada y su texto (para mayor claridad)
   const salaSelect = document.getElementById('sala');
   const salaValue = salaSelect.value;
@@ -130,7 +130,7 @@ document.getElementById('reservaForm').addEventListener('submit', e => {
   const reserva = {
     "Fecha": fecha,
     "Sala": salaText,
-    "N°Personas": nPersonas,
+    "nPersonas": nPersonas,
     "Inicio": inicio,
     "Fin": fin,
     "Motivo": motivo
@@ -145,24 +145,24 @@ document.getElementById('reservaForm').addEventListener('submit', e => {
     },
     body: JSON.stringify({ data: [reserva] })
   })
-  .then(response => response.json())
-  .then(result => {
-    console.log('Respuesta de SheetDB:', result);
-    alert('Reserva enviada correctamente');
-    document.getElementById('reservaForm').reset();
-    document.getElementById('horasTableContainer').style.display = 'none';
-  })
-  .catch(err => {
-    console.error('Error al enviar:', err);
-    alert('Error al enviar la reserva');
-  });
+    .then(response => response.json())
+    .then(result => {
+      console.log('Respuesta de SheetDB:', result);
+      alert('Reserva enviada correctamente');
+      document.getElementById('reservaForm').reset();
+      document.getElementById('horasTableContainer').style.display = 'none';
+    })
+    .catch(err => {
+      console.error('Error al enviar:', err);
+      alert('Error al enviar la reserva');
+    });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const salaSelect = document.getElementById("sala");
   const nPersonasInput = document.getElementById("nPersonas");
   const videoCheckbox = document.getElementById("videollamada");
-  
+
   // Creamos un array con toda la información de las salas
   let allSalas = [];
   // Iteramos por cada optgroup y opción existente en el select
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const groupLabel = optgroup.getAttribute("label");
     optgroup.querySelectorAll("option").forEach(option => {
       // Solo las opciones con value (omitimos el default que tiene value = "")
-      if(option.value) {
+      if (option.value) {
         allSalas.push({
           group: groupLabel,
           value: option.value,
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
-  
+
   // Función que filtra las salas según el número de personas y si necesita videollamada
   function filterSalas() {
     const nPersonas = parseInt(nPersonasInput.value, 10) || 0;
@@ -229,11 +229,43 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   }
-  
+
   // Agregar eventos para disparar el filtrado al cambiar el número de personas o el check de videollamada
   nPersonasInput.addEventListener("input", filterSalas);
   videoCheckbox.addEventListener("change", filterSalas);
-  
+
   // Llamamos una vez para que se cargue el select con todas las salas (sin filtro)
   filterSalas();
+});
+document.addEventListener('DOMContentLoaded', function () {
+  fetch('https://sheetdb.io/api/v1/td4sbrvtrviyp?sheet=Salas')
+    .then((response) => response.json())
+    .then((data) => {
+      // Ordenar por fecha descendente
+      const ordenadas = data.sort((a, b) => {
+        const fechaA = new Date(a.Fecha.split('/').reverse().join('-'));
+        const fechaB = new Date(b.Fecha.split('/').reverse().join('-'));
+        return fechaB - fechaA;
+      });
+
+      // Tomar las dos más recientes
+      const recientes = ordenadas.slice(0, 2);
+
+      const tbody = document.querySelector('#tabla tbody');
+      recientes.forEach(reserva => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+      <td>${reserva.Fecha}</td>
+      <td>${reserva.Sala}</td>
+      <td>${reserva.nPersonas}</td>
+      <td>${reserva.Inicio}</td>
+      <td>${reserva.Fin}</td>
+      <td>${reserva.Motivo}</td>
+    `;
+        tbody.appendChild(fila);
+      });
+    })
+    .catch((error) => {
+      console.error('Error al cargar datos:', error);
+    });
 });

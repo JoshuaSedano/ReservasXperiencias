@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<!-- CSS de Flatpickr -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!-- CSS de Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-<!-- El propio flatpickr -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <!-- El propio flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<!-- Localización en español -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+  <!-- Localización en español -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reservar una Sala</title>
   <link rel="stylesheet" href="style.css">
   <!-- Fuente Open Sans desde Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
+
 <body>
   <h1>Reservar una Sala</h1>
 
@@ -26,7 +25,7 @@
     <!-- Fecha -->
     <label for="fecha">Fecha:</label>
     <input type="text" id="fecha" placeholder="dd/mm/yyyy" name="fecha" required>
-    
+
 
     <!-- Motivo -->
     <label for="motivo">Motivo:</label>
@@ -39,26 +38,28 @@
     <label for="videollamada">¿Necesita videollamada?</label>
     <input type="checkbox" id="videollamada" name="videollamada">
     <!-- Seleccionar una Sala -->
- <!-- Seleccionar una Sala (las opciones contienen datos en atributos, pero se muestra solo el nombre) -->
- <label for="sala">Seleccione una Sala:</label>
- <select id="sala" name="sala" required>
-   <option value="" disabled selected>-- Elija una sala --</option>
-   <optgroup label="Admira U">
-     <option value="Sala Dr Rius" data-capacity="8" data-videoconference="true">Sala Dr Rius</option>
-     <option value="Sala Estudio" data-capacity="8" data-videoconference="true">Sala Estudio</option>
-     <option value="Biblioteca" data-capacity="4" data-videoconference="false">Biblioteca</option>
-     <option value="Sala Reuniones Sótano" data-capacity="16" data-videoconference="false">Sala Reuniones Sótano</option>
-   </optgroup>
-   <optgroup label="Santa Rosa">
-     <option value="Sala 360" data-capacity="10" data-videoconference="false">Sala 360</option>
-     <option value="Garaje" data-capacity="30" data-videoconference="false">Garaje</option>
-     <option value="Barmira" data-capacity="16" data-videoconference="false">Barmira</option>
-   </optgroup>
-   <optgroup label="Planeta">
-     <option value="Mesa nave" data-capacity="6" data-videoconference="true">Mesa nave</option>
-     <option value="Sala Reuniones Terminator" data-capacity="12" data-videoconference="true">Sala Reuniones Terminator</option>
-   </optgroup>
- </select>
+    <!-- Seleccionar una Sala (las opciones contienen datos en atributos, pero se muestra solo el nombre) -->
+    <label for="sala">Seleccione una Sala:</label>
+    <select id="sala" name="sala" required>
+      <option value="" disabled selected>-- Elija una sala --</option>
+      <optgroup label="Admira U">
+        <option value="Sala Dr Rius" data-capacity="8" data-videoconference="true">Sala Dr Rius</option>
+        <option value="Sala Estudio" data-capacity="8" data-videoconference="true">Sala Estudio</option>
+        <option value="Biblioteca" data-capacity="4" data-videoconference="false">Biblioteca</option>
+        <option value="Sala Reuniones Sótano" data-capacity="16" data-videoconference="false">Sala Reuniones Sótano
+        </option>
+      </optgroup>
+      <optgroup label="Santa Rosa">
+        <option value="Sala 360" data-capacity="10" data-videoconference="false">Sala 360</option>
+        <option value="Garaje" data-capacity="30" data-videoconference="false">Garaje</option>
+        <option value="Barmira" data-capacity="16" data-videoconference="false">Barmira</option>
+      </optgroup>
+      <optgroup label="Planeta">
+        <option value="Mesa nave" data-capacity="6" data-videoconference="true">Mesa nave</option>
+        <option value="Sala Reuniones Terminator" data-capacity="12" data-videoconference="true">Sala Reuniones
+          Terminator</option>
+      </optgroup>
+    </select>
 
     <!-- Configurar Horarios (inicialmente oculto) -->
     <div id="horasTableContainer" style="display: none;">
@@ -88,30 +89,36 @@
       <tr>
         <th>Fecha</th>
         <th>Sala</th>
+        <th>NºPersonas</th>
         <th>Inicio</th>
         <th>Fin</th>
         <th>Motivo</th>
       </tr>
     </thead>
+    <tbody>
+
+    </tbody>
     <!-- Aquí se agregarían dinámicamente las reservas -->
   </table>
-<script>
+  <script>
     // Inicializar flatpickr para el campo de fecha
     flatpickr("#fecha", {
       dateFormat: "d/m/Y",
       locale: "es" // Localización en español
     });
-  
+
     // Manejar el evento submit del formulario
-    document.getElementById('formulario').addEventListener('submit', function(event) {
+    document.getElementById('reservaForm').addEventListener('submit', function (event) {
       event.preventDefault(); // Evitar el envío normal del formulario
-  
+
       // Aquí puedes recoger los datos y enviarlos a tu API o hacer lo que necesites
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
       console.log(data); // Muestra los datos en la consola (puedes enviar a tu API aquí)
     });
-</script>
+ 
+  </script>
   <script src="SalasScripts.js"></script>
 </body>
+
 </html>

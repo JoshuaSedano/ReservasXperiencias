@@ -40,6 +40,7 @@ document.getElementById('formulario').addEventListener('submit', function (e) {
     const dataObj = {
       "Fecha": formData.get('fecha'),
       "Experiencia": experiencia,
+      "nPersonas": formData.get('nPersonas'),
       "Inicio": inicio,
       "Fin": fin,
       "Motivo": formData.get('motivo'),
@@ -173,3 +174,35 @@ function adjustFinForRow(row) {
   horaFinHour.value = String(date.getHours()).padStart(2, '0');
   horaFinMinute.value = String(date.getMinutes()).padStart(2, '0');
 }
+document.addEventListener('DOMContentLoaded', function () {
+  fetch('https://sheetdb.io/api/v1/td4sbrvtrviyp?sheet=Experiencias')
+    .then((response) => response.json())
+    .then((data) => {
+      // Ordenar por fecha descendente
+      const ordenadas = data.sort((a, b) => {
+        const fechaA = new Date(a.Fecha.split('/').reverse().join('-'));
+        const fechaB = new Date(b.Fecha.split('/').reverse().join('-'));
+        return fechaB - fechaA;
+      });
+
+      // Tomar las dos más recientes
+      const recientes = ordenadas.slice(0, 2);
+
+      const tbody = document.querySelector('#tabla tbody');
+      recientes.forEach(reserva => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+      <td>${reserva.Fecha}</td>
+      <td>${reserva.Experiencia}</td>
+      <td>${reserva.nPersonas}</td>
+      <td>${reserva.Inicio}</td>
+      <td>${reserva.Fin}</td>
+      <td>${reserva.Motivo}</td>
+    `;
+        tbody.appendChild(fila);
+      });
+    })
+    .catch((error) => {
+      console.error('Error al cargar datos:', error);
+    });
+});
